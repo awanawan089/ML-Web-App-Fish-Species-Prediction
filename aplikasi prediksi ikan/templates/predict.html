@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Fish Species Predictor</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.1.0/js/all.js"></script>
+</head>
+<body>
+    <div class="block">
+        <section class="hero is-dark is-bold">
+            <div class="hero-body">
+                <div class="container has-text-centered">
+                    <h1 class="title">Fish Species Predictor</h1>
+                    <h2 class="subtitle">ML Web App</h2>
+                </div><br>
+                <div class="container has-text-centered">
+                    <a href="{{ url_for('index') }}" class="button is-info is-rounded">Back</a>
+                    <a href="{{ url_for('preview') }}" class="button is-link is-rounded">View Dataset</a>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <article class="message is-primary">
+        <div class="message-header">
+            Prediction Result
+        </div>
+        <div class="message-body">
+            <div class="card">
+                <div class="card-image">
+                    <figure class="image is-3by2">
+                        {% if result_prediction %}
+                            {% if result_prediction == 'Ikan Nila' %}
+                                <img src="{{ url_for('static', filename='ikan_nila.jpg') }}" alt="ikan nila" height="500" width="500">
+                            {% elif result_prediction == 'Ikan Mas' %}
+                                <img src="{{ url_for('static', filename='ikan_mas.jpg') }}" alt="ikan mas" height="500" width="500">
+                            {% elif result_prediction == 'Ikan Lele' %}
+                                <img src="{{ url_for('static', filename='ikan_lele.jpg') }}" alt="ikan lele" height="500" width="500">
+                            {% else %}
+                                <p>No image available for this species</p>
+                            {% endif %}
+                        {% else %}
+                            <p>No prediction available</p>
+                        {% endif %}
+                    </figure>
+                </div>
+
+                <div class="card-content">
+                    <div class="media-content">
+                        {% if result_prediction %}
+                            <p class="title">I think it is Fish Species: {{ result_prediction }}</p>
+                            <p class="subtitle">Using {{ model_selected }} Model</p>
+                        {% else %}
+                            <p>{{ error }}</p>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <footer class="card-footer">
+                    <p class="card-footer-item">Panjang Tubuh: {{ panjang_tubuh }} cm</p>
+                    <p class="card-footer-item">Lebar Tubuh: {{ lebar_tubuh }} cm</p>
+                    <p class="card-footer-item">Panjang Sirip: {{ panjang_sirip }} cm</p>
+                    <p class="card-footer-item">Lebar Sirip: {{ lebar_sirip }} cm</p>
+                </footer>
+            </div>
+        </div>
+    </article>
+
+    <footer class="footer">
+        <div class="content has-text-centered">
+            <p>
+                <strong>Your Name | Year</strong><br>
+                <a href="https://github.com/yourusername">Github</a> | <a href="https://yourportfolio.com">Portfolio</a>.
+            </p>
+        </div>
+    </footer>
+
+</body>
+</html>

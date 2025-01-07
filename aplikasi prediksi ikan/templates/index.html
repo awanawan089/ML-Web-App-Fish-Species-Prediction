@@ -1,0 +1,106 @@
+{% block content %}
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Fish Species Predictor</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.1.0/js/all.js"></script>
+  </head>
+  <body>
+      <div class="block">
+          <section class="hero is-dark is-bold">
+              <div class="hero-body">
+                  <div class="container has-text-centered">
+                      <h1 class="title">Fish Species Predictor</h1>
+                      <h2 class="subtitle">ML Web App</h2>
+                  </div><br>
+                  <div class="container has-text-centered">
+                        <a href="{{url_for('index')}}" class="button is-info is-rounded has-text-centered">Reset</a>
+                        <a href="{{url_for('preview')}}" class="button is-link is-rounded has-text-centered">View Dataset</a>
+                  </div>
+
+              </div>
+          </section>
+      </div>
+      <article class="message is-primary">
+          <div class="message-header">
+              <p>Inputs</p>
+          </div>
+          <div class="message-body">
+            <div class="card">
+                <div class="card-content">
+                    <form action="{{ url_for('analyze') }}" method="POST">
+                        <div class="columns">
+                            <div class="column">
+                                    <div class="field">
+                                            <label for="Panjang Tubuh" class="label">Panjang Tubuh (cm)</label>
+                                            <div class="control">
+                                                <input type="number" name="panjang_tubuh" class="input" placeholder="Number between 0 and 100" min="0" max="100" step="0.1">
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label for="Lebar Tubuh" class="label">Lebar Tubuh (cm)</label>
+                                            <div class="control">
+                                                <input type="number" name="lebar_tubuh" class="input" placeholder="Number between 0 and 50" min="0" max="50" step="0.1">
+                                            </div>
+                                        </div>
+                            </div>
+                            <div class="column">
+                                    <div class="field">
+                                            <label for="Panjang Sirip" class="label">Panjang Sirip (cm)</label>
+                                            <div class="control">
+                                                <input type="number" name="panjang_sirip" class="input" placeholder="Number between 0 and 30" min="0" max="30" step="0.1">
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label for="Lebar Sirip" class="label">Lebar Sirip (cm)</label>
+                                            <div class="control">
+                                                <input type="number" name="lebar_sirip" class="input" placeholder="Number between 0 and 15" min="0" max="15" step="0.1">
+                                            </div>
+                                        </div>
+                            </div>
+                        </div>
+
+                      <br>
+                      <div class="container has-text-centered">
+                            <div class="field">
+                                    <label for="model_choice" class="label">Select Model</label>
+                                    <div class="control">
+                                        <div class="container has-text-centered">
+                                                <div class="select is-primary">
+                                                        <select name="model_choice" id="model_choice">
+                                                            <option value="Logistic">Logistic Regression</option>
+                                                            <option value="KNN">K Nearest Neighbours</option>
+                                                            <option value="SVM">SVM</option>
+                                                        </select>
+                                                    </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <br>
+                                <button class="button is-primary" type="submit">Predict</button>
+                                <button class="button" type="reset">Clear</button>
+                      </div>
+
+                    </form>
+                </div>
+            </div>
+          </div>
+      </article>
+
+      <footer class="footer">
+            <div class="content has-text-centered">
+              <p>
+                <strong>Your Name | Year </strong>.<br>
+                <a href="https://github.com/yourusername">Github</a> | <a href="https://yourportfolio.com">Portfolio</a>.
+              </p>
+            </div>
+          </footer>
+  </body>
+</html>
+
+{% endblock %}
